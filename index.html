@@ -1,1 +1,157 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Турфірма "Мандрівник": Бронювання турів</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 0; background-color: #f4f4f9; }
+        header { background: #007bff; color: white; padding: 20px; text-align: center; }
+        main { padding: 20px; }
+        section { margin-bottom: 30px; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h2 { color: #007bff; border-bottom: 2px solid #007bff; padding-bottom: 5px; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #e9ecef; }
+        form div { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], input[type="email"], input[type="number"], input[type="password"], select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button { background: #28a745; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; }
+        footer { background: #333; color: white; text-align: center; padding: 10px; position: fixed; bottom: 0; width: 100%; }
+    </style>
+</head>
+<body>
 
+    <header>
+        <h1>🌍 Турфірма "Мандрівник"</h1>
+        <p>Ваш шлях до незабутніх пригод!</p>
+    </header>
+
+    <main>
+        
+        <section id="tours">
+            <h2>Наші Популярні Тури</h2>
+            <ul>
+                <li>**Тур "Карпатський Експрес"** - 5 днів у горах.</li>
+                <li>**Тур "Європейський Калейдоскоп"** - 7 днів, 3 столиці.</li>
+                <li>**Тур "Турецька Рів'єра"** - Пляжний відпочинок (All Inclusive).</li>
+                <li>**Тур "Дика Африка"** - Сафарі в Кенії.</li>
+            </ul>
+        </section>
+
+        <section id="schedule">
+            <h2>Розклад та Наявність Місць</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Назва Туру</th>
+                        <th>Дата Відправлення</th>
+                        <th>Тривалість</th>
+                        <th>Вільні Місця</th>
+                        <th>Ціна (від)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Карпатський Експрес</td>
+                        <td>01.03.2026</td>
+                        <td>5 днів</td>
+                        <td>12</td>
+                        <td>9 500 грн</td>
+                    </tr>
+                    <tr>
+                        <td>Європейський Калейдоскоп</td>
+                        <td>15.04.2026</td>
+                        <td>7 днів</td>
+                        <td>**5** (Мало)</td>
+                        <td>19 900 грн</td>
+                    </tr>
+                    <tr>
+                        <td>Турецька Рів'єра</td>
+                        <td>10.06.2026</td>
+                        <td>9 днів</td>
+                        <td>28</td>
+                        <td>15 000 грн</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="booking">
+            <h2>Форма Бронювання Туру</h2>
+            <form action="/submit-booking" method="post">
+                
+                <div>
+                    <label for="fullName">Ваше Ім'я та Прізвище:</label>
+                    <input type="text" id="fullName" name="fullName"
+                           placeholder="Іван Іванович" required>
+                </div>
+
+                <div>
+                    <label for="email">Електронна пошта (для підтвердження):</label>
+                    <input type="email" id="email" name="email"
+                           placeholder="your@email.com" required>
+                </div>
+                
+                <div>
+                    <label for="passengers">Кількість осіб (1-6):</label>
+                    <input type="number" id="passengers" name="passengers"
+                           placeholder="1" required min="1" max="6" value="1">
+                </div>
+                
+                <div>
+                    <label for="tourSelect">Оберіть Тур:</label>
+                    <select id="tourSelect" name="tourName" required>
+                        <option value="" disabled selected>--- Виберіть тур зі списку ---</option>
+                        <option value="karpaty">Карпатський Експрес</option>
+                        <option value="europe">Європейський Калейдоскоп</option>
+                        <option value="turkey">Турецька Рів'єра</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Тип харчування:</label>
+                    <input type="radio" id="food_bb" name="food_type" value="BB" checked>
+                    <label for="food_bb">Сніданки (BB)</label><br>
+                    
+                    <input type="radio" id="food_hb" name="food_type" value="HB">
+                    <label for="food_hb">Напівпансіон (HB)</label><br>
+                    
+                    <input type="radio" id="food_ai" name="food_type" value="AI">
+                    <label for="food_ai">Все включено (AI)</label>
+                </div>
+                
+                <div>
+                    <label for="code">Промокод (4-8 символів):</label>
+                    <input type="text" id="code" name="promo_code"
+                           placeholder="OPTIONAL" pattern="[A-Za-z0-9]{4,8}"
+                           title="Промокод має містити від 4 до 8 літер або цифр.">
+                </div>
+
+                <div>
+                    <label for="comments">Додаткові побажання (наприклад, номер телефону):</label>
+                    <textarea id="comments" name="comments" rows="4"
+                              placeholder="Вкажіть, якщо потрібний інший вид зв'язку..."></textarea>
+                </div>
+
+                <div>
+                    <button type="submit">Забронювати Тур</button>
+                </div>
+
+            </form>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Протокол ЛР №3. Турфірма "Мандрівник". Контактна інформація: +38 (044) 123-45-67</p>
+    </footer>
+
+</body>
+</html>
